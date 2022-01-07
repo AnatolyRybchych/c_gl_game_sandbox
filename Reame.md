@@ -1,0 +1,2 @@
+![alt text](https://github.com/AnatolyRybchysh/c_gl_game_sandbox/blob/main/demos/with_collisions.png?raw=true)
+![alt text](https://github.com/AnatolyRybchysh/c_gl_game_sandbox/blob/main/demos/without_collisions.png?raw=true)
