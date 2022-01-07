@@ -1,0 +1,18 @@
+(x) infinity map
+    (x) drawing visible chunk
+    (x) player collision
+    (x) generating procedure
+
+(x) player jumps
+
+(x) interacting with map
+
+(x) liquids
+
+(x) particles
+
+(x) unique grass generation
+
+(x) unique tree generation
+
+(x) map/game state dumping
