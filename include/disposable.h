@@ -5,6 +5,7 @@ typedef struct __DISPOSABLE_T Disposable;
 
 struct __DISPOSABLE_T
 {
+    //self -> pointer to child of disposable
     void (*dispose)(void *self);
 };
 
