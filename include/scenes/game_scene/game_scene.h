@@ -8,6 +8,7 @@
 #include "game_textures.h"
 #include "tiles.h"
 #include "slime.h"
+#include "map.h"
 
 
 extern Scene GameScene;

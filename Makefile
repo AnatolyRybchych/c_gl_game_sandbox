@@ -1,4 +1,4 @@
-objects 				= main.o glad.o shader_program.o shaders.o texture2d.o gl_camera.o vec_types.o window.o scenes.o game_scene.o game_textures.o tile.o tiles.o slime.o handle_queue.o
+objects 				= map.o main.o glad.o shader_program.o shaders.o texture2d.o gl_camera.o vec_types.o window.o scenes.o game_scene.o game_textures.o tile.o tiles.o slime.o handle_queue.o
 
 
 CC 						= gcc
