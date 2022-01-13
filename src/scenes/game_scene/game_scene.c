@@ -3,6 +3,7 @@
 #define BLOCK_SCALE 0.06f
 
 
+
 static void init()
 {
     load_textures_game_scene();
@@ -10,7 +11,7 @@ static void init()
     init_player();
 };
 
-static void render(RenderContext *context)
+static void handle_activity(RenderContext *context)
 {
     static double time, ftime;
     double t = glfwGetTime();
@@ -46,11 +47,10 @@ static void render(RenderContext *context)
     if(Player.x < 1 - Player.scale - 0.1){
         Player.collision_left = (1 - Player.scale - 0.1 - Player.x) * 2;
     }
+}
 
-    //printf("%f\n",Player.x);
-    
-
-
+static void render(RenderContext *context)
+{
     float scene_width =  context->window_params->size.width/context->window_params->size.height;
 
     gl_camera.push_state();
@@ -81,6 +81,12 @@ static void render(RenderContext *context)
     gl_camera.pop_state();
 }
 
+static void on_frame(RenderContext *context)
+{
+    handle_activity(context);
+    render(context);
+}
+
 static void close()
 {
     glDeleteTextures(TEXTURES_COUNT, GameSceneTextures);
@@ -88,6 +94,6 @@ static void close()
 
 Scene GameScene = {
     .init = init,
-    .on_frame = render,
+    .on_frame = on_frame,
     .close = close,
 };
