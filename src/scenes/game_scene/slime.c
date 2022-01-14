@@ -55,6 +55,24 @@ static void update_params()
 
 static void handle_moving(float ftime)
 {
+    static float acceleration = 0;
+
+    if(!Vision[VISION_BOTTOM])
+    {
+        acceleration += ftime * 0.1;
+        Player.y -= ftime  + acceleration;
+    }
+    else
+    {
+        acceleration = 0;
+    }
+
+    if(Vision[VISION_LEFT] && Vision[VISION_RIGHT])
+    {
+        Player.y += ftime;
+    }
+    
+
     if(keys_status[GLFW_KEY_A] && !Vision[VISION_LEFT]){
         Player.x -= ftime;
     }
@@ -153,5 +171,6 @@ void init_player()
         .breath_speed = DEFAULT_SLIME_BREATH_SPEED,
         .shader_program = ShaderPrograms[SLIME_SHADER_PROGRAM],
         .handle_activity = slime_handle_activity,
+        .y = 1,
     };
 }
