@@ -30,6 +30,8 @@ extern WindowParameters WindowParams;
 
 struct __RENDER_CONTEXT_T{
     WindowParameters *window_params;
+    double ftime;
+    double time;
 };
 
 struct __SIZEF_T{

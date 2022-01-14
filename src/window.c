@@ -29,6 +29,9 @@ int init_window(void (*on_frame_proc)(RenderContext *context))
 
     glfwSetWindowSizeCallback(WindowParams.window, window_size_callback);
     glfwSetKeyCallback(WindowParams.window, key_callback);
+
+    RenderCtx.ftime = glfwGetTime();
+    RenderCtx.time = glfwGetTime();
     return 1;
 }
 
@@ -38,9 +41,13 @@ void start_main_loop()
 
     while (!glfwWindowShouldClose(WindowParams.window))
     {
+        double t = glfwGetTime();
+        RenderCtx.ftime = t - RenderCtx.time;
+        RenderCtx.time = t;
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(0.3, 0.3, 0.3, 1);
         
+
         gl_camera.push_state();
         gl_camera.scale2f(vec2f( WindowParams.size.height/ WindowParams.size.width, 1));
         on_frame(&RenderCtx);

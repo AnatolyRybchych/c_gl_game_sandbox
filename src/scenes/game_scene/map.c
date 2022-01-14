@@ -1,12 +1,10 @@
 #include "../../../include/scenes/game_scene/map.h"
 
-#define BLOCKS_LOADING_DISTANCE_X 100
-#define BLOCKS_LOADING_DISTANCE_Y BLOCKS_LOADING_DISTANCE_X
-
 
 //methods
 static void init();
 static void draw();
+static Tile* getTile(int x, int y);
 
 
 //fields
@@ -22,6 +20,7 @@ Tile *cur_map_chunk[BLOCKS_LOADING_DISTANCE_X][BLOCKS_LOADING_DISTANCE_Y];
 Map map = {
     .init = init,
     .draw = draw,
+    .getTile = getTile,
 };
 
 
@@ -36,7 +35,8 @@ static void init()
         }
     }
 
-    cur_map_chunk[BLOCKS_LOADING_DISTANCE_X/2 - 1][BLOCKS_LOADING_DISTANCE_Y/2] = Tiles[TILE_DIRT];
+    cur_map_chunk[BLOCKS_LOADING_DISTANCE_X/2 - 10][BLOCKS_LOADING_DISTANCE_Y/2] = Tiles[TILE_DIRT];
+    cur_map_chunk[BLOCKS_LOADING_DISTANCE_X/2 + 5][BLOCKS_LOADING_DISTANCE_Y/2] = Tiles[TILE_DIRT];
 }
 
 static void draw()
@@ -60,4 +60,15 @@ static void draw()
     }
 
     gl_camera.pop_state();
+}
+
+
+Tile* getTile(int x, int y)
+{
+    assert(x <  BLOCKS_LOADING_DISTANCE_X / 2);
+    assert(x > -BLOCKS_LOADING_DISTANCE_X / 2);
+    assert(y <  BLOCKS_LOADING_DISTANCE_Y / 2);
+    assert(y > -BLOCKS_LOADING_DISTANCE_Y / 2);
+
+    return cur_map_chunk[BLOCKS_LOADING_DISTANCE_X / 2 + x][BLOCKS_LOADING_DISTANCE_Y / 2 + y];
 }
