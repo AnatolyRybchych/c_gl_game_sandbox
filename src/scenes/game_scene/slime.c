@@ -20,7 +20,6 @@ static void draw_player(Drawable *self)
 {
     Slime *slime = (Slime*)self;
     gl_camera.push_state();
-    gl_camera.translate2f(vec2f(slime->x, slime->y));
     gl_camera.scalef(slime->scale);
 
     glUseProgram(slime->shader_program);

@@ -17,6 +17,12 @@ typedef struct __TILE_T Tile;
 //---------------------------------
 Tile new_tile(GLuint texture, GLuint shader_program);
 
+
+typedef enum
+{
+    SOLID,
+} TileType;
+
 struct __TILE_T
 {
     //should be in top///////
@@ -26,6 +32,7 @@ struct __TILE_T
 
     GLuint texture;
     GLuint shader_program;
+    TileType type;
 
 };
 

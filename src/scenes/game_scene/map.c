@@ -1,11 +1,12 @@
 #include "../../../include/scenes/game_scene/map.h"
 
-#define BLOCKS_LOADING_DISTANCE_X 1000
+#define BLOCKS_LOADING_DISTANCE_X 100
 #define BLOCKS_LOADING_DISTANCE_Y BLOCKS_LOADING_DISTANCE_X
 
 
 //methods
 static void init();
+static void draw();
 
 
 //fields
@@ -20,11 +21,43 @@ Tile *cur_map_chunk[BLOCKS_LOADING_DISTANCE_X][BLOCKS_LOADING_DISTANCE_Y];
 //instance
 Map map = {
     .init = init,
+    .draw = draw,
 };
 
 
 //methods body
 static void init()
 {
+    for(int x = 0; x < BLOCKS_LOADING_DISTANCE_X; x++)
+    {
+        for(int y = 0; y < BLOCKS_LOADING_DISTANCE_Y / 2; y ++)
+        {
+            cur_map_chunk[x][y] = Tiles[TILE_DIRT];
+        }
+    }
 
+    cur_map_chunk[BLOCKS_LOADING_DISTANCE_X/2 - 1][BLOCKS_LOADING_DISTANCE_Y/2] = Tiles[TILE_DIRT];
+}
+
+static void draw()
+{
+    gl_camera.push_state();
+
+    gl_camera.scalef( 1.0 / BLOCKS_LOADING_DISTANCE_X );
+    
+    gl_camera.translate2f(vec2f(- BLOCKS_LOADING_DISTANCE_X, -BLOCKS_LOADING_DISTANCE_Y ));
+
+    for(int x = 0; x < BLOCKS_LOADING_DISTANCE_X; x++)
+    {
+        for(int y = 0; y < BLOCKS_LOADING_DISTANCE_Y ; y ++)
+        {
+            if(cur_map_chunk[x][y])
+                cur_map_chunk[x][y]->drawable.draw((Drawable*)cur_map_chunk[x][y]);
+            gl_camera.translate2f(vec2f(0, 2));
+        }
+        gl_camera.translate2f(vec2f(0, - 2 * BLOCKS_LOADING_DISTANCE_Y));
+        gl_camera.translate2f(vec2f(2, 0));
+    }
+
+    gl_camera.pop_state();
 }

@@ -9,6 +9,7 @@ static void init()
     load_textures_game_scene();
     init_tiles();
     init_player();
+    map.init();
 };
 
 static void handle_activity(RenderContext *context)
@@ -40,12 +41,12 @@ static void handle_activity(RenderContext *context)
     
 
 
-    if(Player.x < 0)
+    if(Player.x < -0.35)
     {
-        Player.x = 0;
+        Player.x = -0.35;
     }
-    if(Player.x < 1 - Player.scale - 0.1){
-        Player.collision_left = (1 - Player.scale - 0.1 - Player.x) * 2;
+    if(Player.x < -0.35 + Player.scale - 0.1){
+        Player.collision_left = (-0.35 + Player.scale - 0.1 - Player.x) * 2;
     }
 }
 
@@ -55,29 +56,18 @@ static void render(RenderContext *context)
 
     gl_camera.push_state();
 
-    for(float y = 1; y >= -0.6; y-= 2*BLOCK_SCALE)
-    {
         gl_camera.push_state();
-        gl_camera.translate2f(vec2f(-0.6/2,y));
-                gl_camera.scalef(BLOCK_SCALE);
-        Tiles[TILE_DIRT]->drawable.draw((Drawable*)Tiles[TILE_DIRT]);
+            gl_camera.translate2f(vec2f_mul(vec2f(Player.x, Player.y), vec2f(-1, -1)));
+            gl_camera.scalef(50);
+            map.draw();
         gl_camera.pop_state();
-    }
 
-    for (float y = -0.6; y > -1; y-= 2*BLOCK_SCALE)
-    {
-        for (float x = - scene_width; x < scene_width; x+= 2*BLOCK_SCALE)
-        {
-            gl_camera.push_state();
-            gl_camera.translate2f(vec2f(x,y));
-                    gl_camera.scalef(BLOCK_SCALE);
-            Tiles[TILE_DIRT]->drawable.draw((Drawable*)Tiles[TILE_DIRT]);
-            gl_camera.pop_state();
-        }
-    }
 
-    Player.scale = 0.6;
-    Player.drawable.draw((Drawable*)&Player);
+        gl_camera.push_state();
+            Player.scale = 0.6;
+            Player.drawable.draw((Drawable*)&Player);
+        gl_camera.pop_state();
+
     gl_camera.pop_state();
 }
 

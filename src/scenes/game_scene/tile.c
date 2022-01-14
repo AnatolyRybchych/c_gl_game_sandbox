@@ -70,5 +70,6 @@ Tile new_tile(GLuint texture, GLuint shader_program)
         },
         .texture = texture,
         .shader_program = shader_program,
+        .type = SOLID,
     };
 }
