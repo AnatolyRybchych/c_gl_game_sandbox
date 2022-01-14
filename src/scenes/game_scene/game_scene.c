@@ -45,8 +45,8 @@ static void handle_activity(RenderContext *context)
     {
         Player.x = -0.35;
     }
-    if(Player.x < -0.35 + Player.scale - 0.1){
-        Player.collision_left = (-0.35 + Player.scale - 0.1 - Player.x) * 2;
+    if(Player.x < -0.4 + Player.scale - 0.1){
+        Player.collision_left = (-0.4 + Player.scale - 0.1 - Player.x) * 2;
     }
 }
 
