@@ -99,3 +99,8 @@ void translate(vec2f_t offset_blocks)
     camera_pos_y_ex -= (int)camera_pos_y_ex;
     camera_pos_x_ex -= (int)camera_pos_x_ex;
 }
+
+static void set_scale(float scale)
+{
+    camera_scale = scale;
+}
