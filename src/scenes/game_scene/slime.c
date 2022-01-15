@@ -171,6 +171,6 @@ void init_player()
         .breath_speed = DEFAULT_SLIME_BREATH_SPEED,
         .shader_program = ShaderPrograms[SLIME_SHADER_PROGRAM],
         .handle_activity = slime_handle_activity,
-        .y = 1,
+        .y = 0,
     };
 }

@@ -22,11 +22,16 @@ static void handle_activity(RenderContext *context)
 
 static void render(RenderContext *context)
 {
+    static vec2f_t player_prev = {0,0};
+    vec2f_t player_curr = vec2f(Player.x, Player.y); 
+    vec2f_t player_off = vec2f_add(player_prev, vec2f_mul(player_curr, vec2f(-1, -1)));
+    player_prev = player_curr;
+
     float scene_width =  context->window_params->size.width/context->window_params->size.height;
+    map.translate(player_off);
     gl_camera.push_state();
         gl_camera.push_state();
-            gl_camera.translate2f(vec2f_mul(vec2f(Player.x, Player.y), vec2f(-1, -1)));
-            gl_camera.scalef(MAP_SCALE);
+            //gl_camera.translate2f(vec2f_mul(vec2f(Player.x, Player.y), vec2f(-1, -1)));
             map.draw();
         gl_camera.pop_state();
 

@@ -10,10 +10,6 @@
 #include "slime.h"
 #include "map.h"
 
-#define MAP_SCALE 10.0f
-#define BLOCK_SCALE (MAP_SCALE / BLOCKS_LOADING_DISTANCE_X)
-#define SLIME_SCALE (SLIME_SIZE_BLOCKS * BLOCK_SCALE)
-
 extern Scene GameScene;
 
 #endif
