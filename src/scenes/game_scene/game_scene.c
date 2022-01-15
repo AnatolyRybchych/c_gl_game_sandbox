@@ -28,18 +28,12 @@ static void render(RenderContext *context)
     player_prev = player_curr;
 
     float scene_width =  context->window_params->size.width/context->window_params->size.height;
+        
     map.translate(player_off);
-    gl_camera.push_state();
-        gl_camera.push_state();
-            //gl_camera.translate2f(vec2f_mul(vec2f(Player.x, Player.y), vec2f(-1, -1)));
-            map.draw();
-        gl_camera.pop_state();
+    map.draw();
 
-
-        Player.scale = SLIME_SCALE;
-        Player.drawable.draw((Drawable*)&Player);
-
-    gl_camera.pop_state();
+    Player.scale = SLIME_SCALE;
+    Player.drawable.draw((Drawable*)&Player);
 }
 
 static void on_frame(RenderContext *context)

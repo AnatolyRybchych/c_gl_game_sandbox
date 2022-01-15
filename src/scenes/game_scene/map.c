@@ -10,13 +10,17 @@ static void set_scale(float scale);
 
 
 //fields
+
+//block were camera is
 static int camera_pos_x, camera_pos_y;
+
+//ofsset in block where camera is  
 static float camera_pos_x_ex, camera_pos_y_ex;
 
+//scale of all map rendering area 
 static float camera_scale;
 
-static int view_port_cx, view_port_cy;
-
+//buffer of tiles, that will be renederd 
 static Tile *cur_map_chunk[BLOCKS_LOADING_DISTANCE_X][BLOCKS_LOADING_DISTANCE_Y];
 
 
@@ -26,6 +30,7 @@ Map map = {
     .draw = draw,
     .getTile = getTile,
     .translate = translate,
+    .set_scale = set_scale,
 };
 
 
@@ -42,8 +47,10 @@ static void init()
 
     camera_pos_x = 0;
     camera_pos_y = 0;
+
     camera_pos_x_ex = 0;
     camera_pos_y_ex = 0;
+
     camera_scale = MAP_SCALE;
 
     cur_map_chunk[BLOCKS_LOADING_DISTANCE_X/2 - 10][BLOCKS_LOADING_DISTANCE_Y/2] = Tiles[TILE_DIRT];
@@ -55,11 +62,8 @@ static void draw()
     gl_camera.push_state();
 
     gl_camera.translate2f(vec2f((camera_pos_x_ex + camera_pos_x) * BLOCK_SCALE, (camera_pos_y_ex + camera_pos_y )* BLOCK_SCALE));
-
-    printf("%f,%f\n", camera_pos_x, camera_pos_y);
-
     gl_camera.scalef( camera_scale / BLOCKS_LOADING_DISTANCE_X );
-    
+
     gl_camera.translate2f(vec2f(- BLOCKS_LOADING_DISTANCE_X, -BLOCKS_LOADING_DISTANCE_Y ));
 
     for(int x = 0; x < BLOCKS_LOADING_DISTANCE_X; x++)
